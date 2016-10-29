@@ -16,21 +16,15 @@
   file: path=dcos_generate_config.sh state=touch mode=0700
 
 - name: Stop Docker container if running
-  become: yes
-  become_method: sudo
   docker:
     name: "{{ bootstrap_container_name }}"
     image: "{{ bootstrap_container_image }}"
     state: stopped
 
 - name: Generate DCOS config
-  become: yes
-  become_method: sudo
   command: ./dcos_generate_config.sh
 
 - name: Start the DCOS installer via Docker
-  become: yes
-  become_method: sudo
   docker:
     name: "{{ bootstrap_container_name }}"
     image: "{{ bootstrap_container_image }}"
