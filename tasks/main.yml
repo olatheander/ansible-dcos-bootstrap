@@ -16,7 +16,7 @@
   file: path=dcos_generate_config.sh state=touch mode=0700
 
 - name: Stop Docker container if running
-  docker:
+  docker_container:
     name: "{{ bootstrap_container_name }}"
     image: "{{ bootstrap_container_image }}"
     state: stopped
@@ -25,7 +25,7 @@
   command: ./dcos_generate_config.sh
 
 - name: Start the DCOS installer via Docker
-  docker:
+  docker_container:
     name: "{{ bootstrap_container_name }}"
     image: "{{ bootstrap_container_image }}"
     state: started
